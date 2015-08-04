@@ -16,14 +16,15 @@ Button btn;
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        VKSdk.initialize(this);
+        
         btn = (Button) findViewById(R.id.button);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                VKSdk.initialize(getApplicationContext());
+
             }
         });
 
