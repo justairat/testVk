@@ -1,6 +1,7 @@
 <resources>
-    <integer name="com.vk.sdk.AppId">5014917</integer>
+
     <string name="app_name">testVk</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>
