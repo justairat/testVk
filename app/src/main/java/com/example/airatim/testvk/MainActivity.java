@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
@@ -36,7 +37,7 @@ public class MainActivity extends Activity{
 
 
 Button btn;
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -44,11 +45,22 @@ Button btn;
         setContentView(R.layout.activity_main);
         VKSdk.initialize(this);
 
-        if(!VKSdk.isLoggedIn())
+        if(!VKSdk.isLoggedIn()) {
             VKSdk.login(this, sMyScope);
+            Toast.makeText(this, "Waiting for login...", Toast.LENGTH_SHORT).show();
+        }
         else{
+            Toast.makeText(this, "Login in", Toast.LENGTH_SHORT).show();
             ShowDialog();
         }
+        btn = (Button)findViewById(R.id.button);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Main2Activity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -56,6 +68,7 @@ Button btn;
             @Override
             public void onResult(VKAccessToken res) {
                 // Пользователь успешно авторизовался
+                Log.d("","Access");
             }
 
             @Override
