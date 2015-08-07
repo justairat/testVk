@@ -18,9 +18,12 @@ import com.vk.sdk.api.VKParameters;
 import com.vk.sdk.api.VKRequest;
 import com.vk.sdk.api.VKResponse;
 
+import java.util.ArrayList;
+
 
 public class Main2Activity extends Activity {
     ListView listView;
+    private final ArrayList<User> friends = new ArrayList<User>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,16 +62,16 @@ public class Main2Activity extends Activity {
         JsonObject resObject = mainObject.getAsJsonObject("response");
         JsonArray arrFriend = resObject.getAsJsonArray("items");
         JsonObject obj = new JsonObject();
+
         String[] str = new String[arrFriend.size()];
         for(int i=0;i<arrFriend.size();i++){
              obj= arrFriend.get(i).getAsJsonObject();
              str[i] = obj.get("first_name").toString()+ " "+ obj.get("last_name").toString();
-        }
-        for(int i=0;i<str.length;i++){
-            str[i] = str[i].replace("\"", "");
+            User varUser = new User(str[i].replace("\"", ""),obj.get("photo_50").toString().replace("\"", ""));
+            friends.add(i,varUser);
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,str);
+        FriendsAdapter adapter = new FriendsAdapter(this,R.layout.mylistitem,friends);
         listView.setAdapter(adapter);
 
     }
