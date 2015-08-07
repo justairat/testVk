@@ -68,7 +68,7 @@ Button btn;
             @Override
             public void onResult(VKAccessToken res) {
                 // Пользователь успешно авторизовался
-                Log.d("","Access");
+
             }
 
             @Override
